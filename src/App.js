@@ -1,25 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import FetchedData from './pages/FetchedData'
+import ManualData  from './pages/ManualData';
+import {Route, Switch, Link} from 'react-router-dom'
 
 function App() {
-  return (
+  return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <Link to="fetchedData">Fetched Data</Link><br /><br />
+        <Link to="manualData">Manual Data</Link><br /><br />
+      </div>
+      <div>
+        <Switch>
+          <Route path="/fetchedData"><FetchedData  /></Route>
+          <Route path="/manualData"><ManualData /></Route>
+        </Switch>
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
