@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react'
 function FetchedData() {
   const [list, setList] = useState([])
   const [searchItem, setSearchItem] = useState('')
-  
-  useEffect(  () =>  {
+  const [filteredList, setFilteredList] = useState([])
+
+  useEffect(() =>  {
     try{
       const fetchData = async () => {
         const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -24,12 +25,19 @@ function FetchedData() {
     setSearchItem(inputData)
   }
   
+  useEffect(() => {
+    const filtered = list.filter((element) => {
+      return element.title.toLowerCase().includes(searchItem.toLowerCase())
+    })
+    setFilteredList(filtered)
+  }, [filteredList])
+  // setList(filtered)
+
   const handleSearch = (e) => {
     e.preventDefault()
-    const filtered = list.filter((element) => {
-      return element.title === searchItem
-    })
-    setList(filtered)
+    // const filtered = list.filter((element) => {
+    //   return element.title.toLowerCase().includes(searchItem.toLowerCase())
+    // })
   }
   
   return (
@@ -39,7 +47,7 @@ function FetchedData() {
         <button onClick={handleSearch}>Search</button><br /><br />
         <h1>Fetched List Items</h1>
         {
-          list.map((element) => {
+          filteredList.map((element) => {
             return (
               <div key={element.id}>
                 <p>{element.title}</p>

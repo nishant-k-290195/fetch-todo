@@ -1,4 +1,5 @@
 import { useState } from "react"
+import uuid from 'react-uuid'
 
 const currentTime = new Date().getTime()
 
@@ -53,7 +54,7 @@ const ManualData = () => {
   }
 
   const handleAdd = () => {
-    setUniqueKey(uniqueKey*currentTime+1*Math.random())
+    setUniqueKey(uuid())
 
     setPostList((prev) => {
       return [...prev, post]
